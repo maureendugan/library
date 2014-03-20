@@ -23,6 +23,11 @@ class Book
     book
   end
 
+  def self.update(old_title,new_title)
+    #could this method update other values in the table?
+    DB.exec("UPDATE books SET title = '#{@title}' WHERE title = '#{old_title}';")
+  end
+
   def save
     result = DB.exec("INSERT INTO books (title) VALUES ('#{@title}') RETURNING id;")
     @id = result.first['id'].to_i
