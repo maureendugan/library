@@ -33,19 +33,28 @@ describe BookAuthor do
     end
   end
 
-  describe '#update' do
-    it 'should update a author\'s author_id' do
-      test_book_author = BookAuthor.create('Mark')
-      test_book_author.update({:author_id => '1'})
-      BookAuthor.all.first.author_id.should eq 1
-    end
-  end
+  # describe '#update' do
+  #   it 'should update a author\'s author_id' do
+  #     test_book_author = BookAuthor.create('Mark')
+  #     test_book_author.update({:author_id => '1'})
+  #     BookAuthor.all.first.author_id.should eq 1
+  #   end
+  # end
 
-  describe '#destroy' do
-    it 'should remove a author from the database' do
-      test_book_author = BookAuthor.create("Plato")
-      test_book_author.destroy
-      BookAuthor.all.should eq []
+  # describe '#destroy' do
+  #   it 'should remove a author from the database' do
+  #     test_book_author = BookAuthor.create("Plato")
+  #     test_book_author.destroy
+  #     BookAuthor.all.should eq []
+  #   end
+  # end
+
+  describe '.search_for_books_by_author' do
+    it 'returns the books in the library written by a particular author' do
+      test_entry1 = BookAuthor.create("Lord of the Flies", "William Golding")
+      test_entry2 = BookAuthor.create("Brave New World", "Aldous Huxley")
+      test_entry3 = BookAuthor.create("Brave New World Part II", "Aldous Huxley")
+      BookAuthor.search_for_books_by_author("Aldous Huxley").length.should eq 2
     end
   end
 
