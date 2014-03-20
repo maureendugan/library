@@ -39,6 +39,17 @@ describe Book do
     end
   end
 
+  describe '.search_id' do
+    it 'should take a book and return its id' do
+      test_book = Book.create("Lord of the flies")
+      Book.search_id("Lord of the flies").should eq test_book.id
+    end
+    it 'should return nil if the book does not exist' do
+      test_book = Book.create("Lord of the flies")
+      Book.search_id("Rubixs Cube Awesomeness").should eq nil
+    end
+  end
+
   describe '#save' do
     it 'saves an instance of a book to the database' do
       test_book = Book.create("White Fang")

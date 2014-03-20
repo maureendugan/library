@@ -32,6 +32,15 @@ class Book
     DB.exec("DELETE FROM books WHERE id = #{@id};")
   end
 
+  def self.search_id(search_title)
+    result = DB.exec("SELECT id FROM books WHERE title = '#{search_title}';")
+    if result.first
+      result.first['id'].to_i
+    else
+      nil
+    end
+  end
+
   def save
     result = DB.exec("INSERT INTO books (title) VALUES ('#{@title}') RETURNING id;")
     @id = result.first['id'].to_i

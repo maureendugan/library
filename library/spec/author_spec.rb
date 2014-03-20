@@ -38,6 +38,17 @@ describe Author do
     end
   end
 
+  describe '.search_id' do
+    it 'should return an author object if it exists' do
+      test_author = Author.create("Lincoln")
+      Author.search_id("Lincoln").should eq test_author.id
+    end
+    it 'should return nil if the author doesn\'t exist' do
+      test_author = Author.create("Lincoln")
+      Author.search_id("Ellie").should eq nil
+    end
+  end
+
   describe '#save' do
     it 'saves an instance of a author to the database' do
       test_author = Author.create("Jack London")
