@@ -17,9 +17,14 @@ class Book
     books
   end
 
+  def self.create(title)
+    book = Book.new({:title => title})
+    book.save
+    book
+  end
+
   def save
     result = DB.exec("INSERT INTO books (title) VALUES ('#{@title}') RETURNING id;")
-    p result
     @id = result.first['id'].to_i
   end
 

@@ -15,10 +15,17 @@ describe Book do
     end
   end
 
+  describe '.create' do
+    it 'creates an instance of a Book' do
+      test_book = Book.create("Gone With the Wind")
+      test_book.should be_an_instance_of Book
+      Book.all.should eq [test_book]
+    end
+  end
+
   describe '#save' do
     it 'saves an instance of a book to the database' do
-      test_book = Book.new({:title => "White Fang"})
-      test_book.save
+      test_book = Book.create("White Fang")
       Book.all.should eq [test_book]
     end
   end
