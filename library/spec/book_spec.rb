@@ -23,6 +23,22 @@ describe Book do
     end
   end
 
+  describe '#update' do
+    it 'should update a book\'s title' do
+      test_book = Book.create('Where the Wild Tings Are')
+      test_book.update({:title => 'Where the Wild Things Are'})
+      Book.all.first.title.should eq 'Where the Wild Things Are'
+    end
+  end
+
+  describe '#destroy' do
+    it 'should remove a book from the database' do
+      test_book = Book.create("The Lord of the Rings")
+      test_book.destroy
+      Book.all.should eq []
+    end
+  end
+
   describe '#save' do
     it 'saves an instance of a book to the database' do
       test_book = Book.create("White Fang")
@@ -35,14 +51,6 @@ describe Book do
       test_book1 = Book.new({:title => 'Where the Wild Things Are', :id => 5})
       test_book2 = Book.new({:title => 'Where the Wild Things Are', :id => 5})
       test_book2.should eq test_book1
-    end
-  end
-
-  describe '#update' do
-    it 'should update a book\'s title' do
-      test_book = Book.create('Where the Wild Tings Are')
-      test_book.update({:title => 'Where the Wild Things Are'})
-      Book.all.first.title.should eq 'Where the Wild Things Are'
     end
   end
 end

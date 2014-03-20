@@ -28,6 +28,10 @@ class Book
     DB.exec("UPDATE books SET title = '#{@title}' WHERE id = '#{@id}';")
   end
 
+  def destroy
+    DB.exec("DELETE FROM books WHERE id = #{@id};")
+  end
+
   def save
     result = DB.exec("INSERT INTO books (title) VALUES ('#{@title}') RETURNING id;")
     @id = result.first['id'].to_i
