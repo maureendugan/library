@@ -38,10 +38,10 @@ describe Book do
     end
   end
 
-  describe '.update' do
+  describe '#update' do
     it 'should update a book\'s title' do
       test_book = Book.create('Where the Wild Tings Are')
-      Book.update('Where the Wild Tings Are', 'Where the Wild Things Are')
+      test_book.update({:title => 'Where the Wild Things Are'})
       Book.all.first.title.should eq 'Where the Wild Things Are'
     end
   end

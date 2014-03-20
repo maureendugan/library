@@ -23,9 +23,9 @@ class Book
     book
   end
 
-  def self.update(old_title,new_title)
-    #could this method update other values in the table?
-    DB.exec("UPDATE books SET title = '#{@title}' WHERE title = '#{old_title}';")
+  def update(attributes)
+    @title = attributes[:title]
+    DB.exec("UPDATE books SET title = '#{@title}' WHERE id = '#{@id}';")
   end
 
   def save
