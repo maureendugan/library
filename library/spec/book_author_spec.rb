@@ -54,7 +54,15 @@ describe BookAuthor do
       test_entry1 = BookAuthor.create("Lord of the Flies", "William Golding")
       test_entry2 = BookAuthor.create("Brave New World", "Aldous Huxley")
       test_entry3 = BookAuthor.create("Brave New World Part II", "Aldous Huxley")
-      BookAuthor.search_for_books_by_author("Aldous Huxley").length.should eq 2
+      BookAuthor.search_for_books_by_author("Aldous Huxley").should eq ['Brave New World', 'Brave New World Part II']
+    end
+  end
+
+  describe '.search_for_authors_of_book' do
+    it 'returns the authors of a book' do
+      test_entry1 = BookAuthor.create("Special Report", "Ellie")
+      test_entry2 = BookAuthor.create("Special Report", "Moe")
+      BookAuthor.search_for_authors_of_book("Special Report").should eq ["Ellie", "Moe"]
     end
   end
 

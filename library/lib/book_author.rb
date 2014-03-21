@@ -40,6 +40,18 @@ class BookAuthor
     books
   end
 
+  def self.search_for_authors_of_book(book_title)
+    authors = []
+    results = DB.exec("SELECT name FROM
+                      books JOIN books_authors ON (books.id = books_id)
+                            JOIN authors ON (authors.id = authors_id)
+                            WHERE title = '#{book_title}';")
+    results.each do |result|
+      authors << result['name']
+    end
+    authors
+  end
+
   def save
     result = DB.exec("INSERT INTO books_authors (authors_id, books_id) VALUES ('#{@authors_id}', '#{@books_id}') RETURNING id;")
     @id = result.first['id'].to_i
